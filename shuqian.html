@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>数钱游戏</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection"content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" /><!-- 删除苹果默认的工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /><!-- 设置苹果工具栏颜色 -->
+<meta name="format-detection" content="telphone=no, email=no" /><!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+<!-- 启用360浏览器的极速模式(webkit) -->
+<meta name="renderer" content="webkit">
+<!-- 避免IE使用兼容模式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+<meta name="HandheldFriendly" content="true">
+<!-- 微软的老式浏览器 -->
+<meta name="MobileOptimized" content="320">
+<!-- uc强制竖屏 -->
+<meta name="screen-orientation" content="portrait">
+<!-- QQ强制竖屏 -->
+<meta name="x5-orientation" content="portrait">
+<!-- UC强制全屏 -->
+<meta name="full-screen" content="yes">
+<!-- QQ强制全屏 -->
+<meta name="x5-fullscreen" content="true">
+<!-- UC应用模式 -->
+<meta name="browsermode" content="application">
+<!-- QQ应用模式 -->
+<meta name="x5-page-mode" content="app">
+<!-- windows phone 点击无高光 -->
+<meta name="msapplication-tap-highlight" content="no">
+
+
+<link rel="stylesheet" type="text/css" href="css/animate.min.css">
+<style type="text/css">
+	html, body {
+    -webkit-user-select: none; /*禁止选中文本*/
+    user-select: none;
+}
+		*{ margin: 0; padding: 0;border: 0;}
+		html, body{height: 100%;overflow:hidden;}
+		#wrap{width: 100%;height: 100%;position: relative;}
+		.nav{width: 100%;height: 30px;}
+		.nav li{float: left;width: 33.33%;height:30px;list-style: none;color: white;text-align: center;background:#342e2e;font-size: 13px;line-height: 30px;}
+		.page{position: absolute;left: 0;top: 30px;width: 100%;height: 100%;display: none;}
+		#mainPage,#gameRule,#gameExplain{background: url('shuqianimages/bg1.png');position: relative;left: 0;top: 0;}
+		#gameRule>img,#gameExplain>img{width: 40%;position:absolute;top: 20px;left:20px;}
+		.ruleDiv{background:url('shuqianimages/rulebg_03.png');position:absolute;width:85%;height: 50%;left:4%;top:10%;background-size:100% 100% ;padding-top: 40px;padding-left:20px;}
+		.ruleDiv h3{margin: 0 auto;text-align: center;color:#252525;font-size: 25px;}
+		.ruleDiv p{color:#464646;line-height: 20px;width:80%;margin:0 auto;}
+		.logo{width: 40%;position:absolute;-webkit-animation: moveInRight .5s;top: 20px;left:20px; }
+		.zhuzi{width: 90%;position: absolute;left: 5%;top:10%;-webkit-transition: all 1.5s}
+		.qiandui{position:absolute;left: 15%;top: 35%;width:70%;-webkit-animation-delay:.7s;}
+		.jinbi1{position: absolute;left: 10%;top: 60%;width: 18%;-webkit-animation-delay:1.5s}
+		.jinbi2{position: absolute;left: 60%;top: 55%;width:15%;-webkit-animation-delay:2s}
+		.btn{position: absolute;opacity:0;-webkit-animation:opaChange 2s;-webkit-animation-delay:.5s}
+		.piao{position: absolute;left: 0;top: -2200px;
+			}
+		.piao-animation{
+			-webkit-animation-duration:1.5s;}
+		.gamePage{width: 100%;height:100%;background: black;position: absolute;top: 0;left: 0;background:url('shuqianimages/bg1.png') no-repeat;display: none;}	
+		.pageLogo{width: 40%;position:absolute;top: 10px;left:10px; }	
+		.score{position:absolute;width:30%;height:30px;top:13px;left:60%;background: url('shuqianimages/scorebg_03.png') no-repeat;background-size:100% 100%;text-align:right;line-height:35px;padding-right:10px;font-size:15px;color:#2b2b2b;}
+		.score p{text-align:left;position: absolute;left: 20%;top: 0;color:#ff3333;font-size: 20px;}
+		.cheerWord{position: absolute;width:50%;top:0%;left:25%}
+		.gameMain{width: 100%;height:80%;position: absolute;top: 15%;background: url('shuqianimages/fenwei.png') no-repeat;background-size:100% 100%;}
+		.moneyWrap{position: absolute;width: 100%;top: 20%;left:0;height: 70%;/*overflow: hidden;*/}
+		 .money{width: 100%;position:absolute;}
+		 .arrow{position:absolute;width: 20%;top:45%;left:40%;-webkit-animation-duration:1.5s;}
+
+		.qian_moved{width: 100%;position:absolute;left:0;top: 0;-webkit-animation: qian_move 1s;}
+		
+		@-webkit-keyframes moveInRight{
+			0%{
+				-webkit-transform:translateX(1000px) ;
+				top: 20px;left: 20px;
+			}
+			100%{
+				-webkit-transform:translateX(0) ;
+				top: 20px;left: 20px;
+			}
+
+		}
+		/*@-webkit-keyframes aaa{
+			0%{
+				-webkit-transform:translateX(1000px) ;
+				top: 10%;left: 50000px;
+			}
+			100%{
+				-webkit-transform:translateX(0) ;
+				top: 10%;left: 5%;
+
+		}*/
+		@-webkit-keyframes opaChange{
+			0%{
+				opacity: 0;
+				position: absolute;left: 25%;top: 75%;width:50%;
+			}
+			50%{
+				opacity: 0.5;
+				position: absolute;left: 25%;top: 75%;width:50%;
+			}
+			100%{
+				opacity: 1;
+				position: absolute;left: 25%;top: 75%;width:50%;
+
+		}
+	}
+	@-webkit-keyframes qian_move{
+        	0%{
+		opacity: 1;
+		-webkit-transform: translateY(0) scale(1);
+		
+		transform: translateY(0) scale(1);
+
+		-ms-transform: translateY(0) scale(1);
+		-moz-transform: translateY(0) scale(1);
+		-o-transform: translateY(0) scale(1);
+
+
+		}
+			100%{
+				opacity: 0;
+				-webkit-transform: translateY(-1500px) scale(0.2);
+				transform: translateY(-1500px) scale(0.2);
+				
+				-ms-transform: translateY(-1500px) scale(0.2);
+				-moz-transform: translateY(-1500px) scale(0.2);
+				-o-transform: translateY(-1500px) scale(0.2);
+
+	}
+}
+	
+	</style>
+</head>
+<body style="position:relative;">
+<audio src="audio/bgmusic.mp3" autoplay loop></audio>
+ <div id="wrap">
+ 	<ul class="nav">
+ 		<li style="background:#211c1c;" class="li">游戏</li>
+ 		<li class="li" class="li">游戏规则</li>
+ 		<li class="li" class="li">游戏说明</li>
+ 	</ul>
+ 	<div id="mainPage" class="page" style="display: block;">
+ 		<img src="shuqianimages/logo.png" class="logo ">
+ 		<img src="shuqianimages/zhuzi.png" class="zhuzi ">
+ 		<img src="shuqianimages/qiandui.png" class="qiandui animated bounceInDown">
+ 		<img src="shuqianimages/money1.png" class="jinbi1 animated bounceInDown">
+ 		<img src="shuqianimages/money2.png" class="jinbi2 animated bounceInDown">
+ 		<img src="shuqianimages/button.png" class="btn ">
+ 		<img src="shuqianimages/piao.png" class="piao ">
+ 	</div>
+ 	<div id="gameRule" class="page">
+ 		<img src="shuqianimages/logo.png">
+ 		<div class="ruleDiv">
+ 			<h3>游戏规则</h3>
+ 			<p>1. 主持人宣布进入游戏之后方可开始游戏;</p>
+ 			<p>2. 点击【开始游戏】，进入游戏页面;</p>
+ 			<p>3. 向上滑动手机屏幕即为数钱一次;</p>
+ 			<p>4. 快速滑动屏幕产生实时数钱数据;</p>
+ 			<p>5. 根据实时数据高低，产生游戏排名，领取奖品。</p>
+ 		</div>
+ 	</div>
+ 	<div id="gameExplain" class="page">
+ 		<img src="shuqianimages/logo.png">
+ 		<div class="ruleDiv">
+ 			<h3>游戏说明</h3>
+ 			<p>1.每轮游戏时间为30s；</p>
+ 			<p>2.游戏结束后， 根据个人成绩进行排名；</p>
+ 			<p>3.游戏榜排名靠前的客户，将获得南京银行提供的大奖一份；</p>
+ 			<p>4.同一客户，不可重复领取游戏奖品；</p>
+ 			<p>5.此次活动最终解释权归南京银行北京分行所有。</p>
+ 		</div>
+ 	</div>
+ </div>
+ <div class="gamePage">
+ 	<img src="shuqianimages/logo.png" class="pageLogo ">
+ 	<div class='score'>
+ 		<p class="movingScore">0.0</p>元
+ 	</div>
+ 	<div class="gameMain">
+ 		<img src="shuqianimages/1.png" alt="" / class="cheerWord">
+ 		<div class="moneyWrap">
+ 			<img src="shuqianimages/renminbi.png" alt="" / class="money">
+ 			<img src="shuqianimages/arrow.png" alt="" / class="arrow animated fadeOut infinite">
+ 		</div>
+ 		
+ 	</div>
+ </div>
+</body>
+
+<script type="text/javascript" src="js/touch.min.js"></script>
+
+<script type="text/javascript">
+var wrap=document.getElementById('wrap');
+var ul=document.getElementsByClassName('nav')[0];
+var lis=document.getElementsByClassName('li');
+var page=document.getElementsByClassName('page');
+var logo=document.getElementsByClassName('logo')[0];
+var zhuzi=document.getElementsByClassName('zhuzi')[0];
+var qiandui=document.getElementsByClassName('qiandui')[0];
+var btn=document.getElementsByClassName('btn')[0];
+var piao=document.getElementsByClassName('piao')[0];
+var gamePage=document.getElementsByClassName('gamePage')[0];
+var cheerWord=document.getElementsByClassName('cheerWord')[0];
+var moneyWrap=document.getElementsByClassName('moneyWrap')[0];
+var money=document.getElementsByClassName('money')[0];
+// var arrow=document.getElementsByClassName('arrow')[0];
+var mainPage=document.getElementById('mainPage');
+var gameRule=document.getElementById('gameRule');
+var gameExplain=document.getElementById('gameExplain');
+
+
+	  lis[0].addEventListener('touchstart',touch0, false);  
+   function touch0 (event){  
+        var event = event || window.event; 
+         page[0].style.display="block";
+		page[1].style.display="none";
+		page[2].style.display="none";
+		lis[0].style.background="#211c1c";
+		lis[1].style.background="#342e2e";
+		lis[2].style.background="#342e2e";
+	}
+	 lis[1].addEventListener('touchstart',touch1, false);
+	 function touch1 (event){  
+        var event = event || window.event; 
+     page[1].style.display="block";
+	page[0].style.display="none";
+	page[2].style.display="none";
+	lis[1].style.background="#211c1c";
+	lis[0].style.background="#342e2e";
+	lis[2].style.background="#342e2e";
+	}  
+	lis[2].addEventListener('touchstart',touch2,false);
+	function touch2(event){
+		var event = event || window.event;
+		  page[2].style.display="block";
+			page[1].style.display="none";
+	      page[0].style.display="none";
+	       lis[2].style.background="#211c1c";
+	      lis[1].style.background="#342e2e";
+	     lis[0].style.background="#342e2e";
+   
+	}
+
+
+
+	
+//setTimeout(function(){
+//	logo.className=" animated  swing ";
+//	logo.style.position="absolute";
+//	logo.style.width="40%";
+//	logo.style.top="10px";
+//	logo.style.left="10px";
+//
+//},1000);
+setTimeout(function(){
+	zhuzi.className=" animated  swing ";
+	zhuzi.style.position="absolute";
+	zhuzi.style.width="90%";
+	zhuzi.style.top="10%";
+	zhuzi.style.left="5%";
+
+},1000);
+setTimeout(function(){
+	btn.className=" animated  tada ";
+	btn.style.position="absolute";
+	btn.style.width="50%";
+	btn.style.top="75%";
+	btn.style.left="25%";
+	
+
+},2000);
+//=====================================================
+
+//==========================================================
+btn.onclick=function(){
+	setTimeout(function(){
+	piao.className="animated fadeInDown piao-animation";
+	piao.style.position="absolute";
+	piao.style.top="-500px";
+	piao.style.left="0";
+	piao.style.width="100%";
+
+//	wrap.style.display="none";
+//	gamePage.style.display="block";
+	},500)
+	wrap.style.display="none";
+	gamePage.style.display="block";
+//	zhuzi.style.display="none";
+//	mainPage.style.display="none";
+//	gameRule.style.display="none";
+//	gameExplain.style.display="none";
+}
+
+function getElementByID(ID){
+	return document.getElementById(ID);
+}
+//记录成绩的变量
+	var number = 0;
+//添加触摸事件，触摸上去之后，取消默认事件
+	touch.on(".moneyWrap","touchstart",function(e){
+		e.preventDefault();
+	});
+	//向上扫动的事件
+	touch.on(".moneyWrap","swipeup",function(e){
+		e.preventDefault();
+		//开始扫动之后，箭头隐藏
+var arrow=document.getElementsByClassName('arrow')[0];
+		arrow.style.display = "none";
+		number++;
+var movingScore=document.getElementsByClassName('movingScore')[0];
+		movingScore.innerHTML=number*100;
+
+		//创建一张钱币，并设置动画效果
+		var moved_money = document.createElement("img");
+		moved_money.src ="shuqianimages/renminbi.png";
+		moved_money.className ="qian_moved";
+
+		//创建的钱币加到父节点上。
+		moneyWrap.appendChild(moved_money);
+		var timer=setTimeout(function(){
+		moneyWrap.removeChild(moved_money);
+		},1000);
+})
+	var flag = 0;
+	var changeTextTimer = setInterval(function(){
+		var n = flag%5 + 1;
+		cheerWord.src ="shuqianimages/"+n+".png";
+		flag++;
+	},2000);
+//==========================================================
+
+
+</script>
+</html>

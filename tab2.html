@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.div1{width: 300px;height: 300px;}
+	</style>
+</head>
+<body>
+<input class="aa" type="button" name="btn1" id="btn1" value="绿色">
+<input class="aa" type="button" name="btn2" id='btn2' value="红色">	
+<input class="aa" type="button" name="btn3" id='btn3' value="蓝色">	
+<div style="width: 300px;height: 300px;overflow:hidden;">
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+</div>
+</body>
+<script>
+	var btn1 = document.getElementById('btn1');
+	var btn2 = document.getElementById('btn2');
+	var btn3 = document.getElementById('btn3');
+	var div1 = document.getElementsByClassName('div1');
+	
+	
+	btn1.onclick = function(){
+			div1[0].style.display = "block";
+			div1[0].style.background = "green";
+			div1[1].style.display = "none";
+			div1[2].style.display = "none";
+		}
+	btn2.onclick = function(){
+			div1[0].style.display = "none";
+			div1[1].style.display = "block";
+			div1[1].style.background = "red";
+			div1[2].style.display = "none";
+
+		}
+	
+	btn3.onclick = function(){
+			div1[0].style.display = "none";
+			div1[1].style.display = "none";
+			div1[2].style.display = "block";
+			div1[2].style.background = "blue";
+		}
+</script>
+</html>
